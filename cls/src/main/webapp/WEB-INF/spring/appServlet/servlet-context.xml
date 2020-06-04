@@ -10,8 +10,12 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
-
+<!-- 	<annotation-driven /> -->
+	<!--
+		 ㅡmvc 스키마에서 정의해놓은 태그 
+		 
+		 루트경로 하위의 모든 클래스를 스캔한 후 
+		  어노테이션이 붙어있는 태그를 빈처리하는 태그 	 -->
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/css/**" location="/resources/css/" />
@@ -26,8 +30,17 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.increpas.cls" />
-	
-	
+	<!-- <context:component-scan base-package="com.increpas.cls" /> -->
+	<context:component-scan base-package="com.increpas.cls.home" />
+	<!-- 특정 패키지 안의 클래스들을 스캔하고 
+		어노테이션을 확인한 후 
+		bean처리를 한다. 
+		참고 ]
+			<context:annotation-config>
+		
+			==> 이미 등록된 bean(객체)들의 Annotation을 활성화 시키기 위한 태그 
+			
+				이 태그는 bean을 등록하는 작업을 하지 않는다. 
+	 -->
 	
 </beans:beans>

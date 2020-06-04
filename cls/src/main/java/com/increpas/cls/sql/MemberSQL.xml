@@ -8,8 +8,8 @@
 					루트 태그는 사용하는 스키마나 DTD에서 정해놓은 것만 사용할 수 있다.
 -->
 <!DOCTYPE mapper
-			PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 					
 <!--
 	namespace 란?
@@ -54,4 +54,22 @@
 	<select id="idCount" resultType="int" parameterType="string">
 		<include refid="selCNT" /> #{id}
 	</select>
+	
+	<select id="nameList" resultType="mVO" > <!-- resultType 을 생각할 땐 여러 행이 반환되더라도 한 행의 데이터를 모두 담을 타입으로 지정한다. --> 
+		SELECT
+			name, mno
+		FROM
+			member
+		WHERE
+			isshow = 'Y'
+	</select>
+	<select id="getDetail" resultType="mVO" parameterType="mVO">
+		SELECT
+			name, id, mail,m.gen gen, tel, TO_CHAR(joindate,'YYYY-MM-DD HH24:mm:ss') sdate,mno , savename avatar
+		FROM
+			member m , avatar a
+		WHERE
+			mno = #{mno}
+			AND m.ano = a.ano 
+	</select> 
 </mapper>
